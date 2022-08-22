@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<meta charset="ISO-8859-1">
+
+<html lang="es" >
+
+<head>
+
+  <!-- <meta charset="UTF-8"> -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>CodePen - POS Receipt Template Html Css</title>
+
+<style>
+@media print {
+    .page-break { display: block; page-break-before: always; }
+}
+#invoice-POS {
+  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+  padding: 2mm;
+  margin: 0 auto;
+  width: 70mm;
+  height:200mm;
+  background: #FFF;
+}
+#invoice-POS ::selection {
+  background: #f31544;
+  color: #FFF;
+}
+#invoice-POS ::moz-selection {
+  background: #f31544;
+  color: #FFF;
+}
+#invoice-POS h1 {
+  font-size: 1.5em;
+  color: #222;
+}
+#invoice-POS h2 {
+  font-size: 1em;
+  font-weight: bold;
+  text-align:center;
+}
+#invoice-POS h3 {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align:center;
+}
+
+#invoice-POS texto1 {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align:center;
+}
+
+#invoice-POS p {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.2em;
+}
+#invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+  /* Targets all id with 'col-' */
+  border-bottom: 1px solid #EEE;
+}
+#invoice-POS #top {
+  min-height: 100px;
+}
+#invoice-POS #mid {
+  min-height: 80px;
+}
+#invoice-POS #bot {
+  min-height: 50px;
+}
+#invoice-POS #top .logo {
+	position:relative;
+	top: 5px;
+	left:2px;
+	height: 120px;
+  width: 120px;
+  background: url(../static/images/qr.jpg) no-repeat;
+  background-size: 120px 120px;
+  -webkit-print-color-adjust: exact;
+}
+#invoice-POS .clientlogo {
+  float: left;
+  height: 60px;
+  width: 60px;
+  background: url(../static/images/qr.jpg) no-repeat;
+  background-size: 120px 120px;
+  border-radius: 20px;
+}
+#invoice-POS .info {
+  display: block;
+  margin-left: 0;
+}
+#invoice-POS .title {
+  float: right;
+}
+#invoice-POS .title p {
+  text-align: right;
+}
+#invoice-POS table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#invoice-POS .tabletitle {
+  font-size: .5em;
+  background: #EEE;
+}
+#invoice-POS .service {
+  border-bottom: 1px solid #EEE;
+}
+#invoice-POS .item {
+  width: 5mm;
+}
+#invoice-POS .itemtext {
+  font-size: .65em;
+}
+#invoice-POS #legalcopy {
+  margin-top: 5mm;
+}
+
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+<script>
+function PrintElem() 
+{
+    Popup($html);
+}
+
+function Popup(data) 
+{
+    var myWindow = window.open('', 'Receipt', 'height=400,width=600');
+    myWindow.document.write('<html><head><title>Receipt</title>');
+    /*optional stylesheet*/ //myWindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+    myWindow.document.write('<style type="text/css"> *, html {margin:0;padding:0;} </style>');
+    myWindow.document.write('</head><body>');
+    myWindow.document.write(data);
+    myWindow.document.write('</body></html>');
+    myWindow.document.close(); // necessary for IE >= 10
+
+    myWindow.onload=function(){ // necessary if the div contain images
+
+        myWindow.focus(); // necessary for IE >= 10
+        myWindow.print();
+        myWindow.close();
+    };
+}
+
+</script>
+
+
+</head>
+
+<body translate="no" >
+
+  <div id="invoice-POS">
+	<!--
+    <center id="top">
+      <div class="logo"></div>
+      <div class="info"> 
+      </div>
+    </center>
+	-->
+    <div id="mid">
+      <div class="info">
+        <h2>{{nombre}}</h2>
+        <d1 style=" font-size: 1em;"> 
+			      Ruc: {{ruc}} </br>
+            Dirección : {{direccion}}</br>
+            Email   : plinioavendano@gmail.com</br>
+            Teléfono   : 952648192</br>
+        </d1>
+      </div>
+    </div><!--End Invoice Mid-->
+  
+    <div class="info" style="  text-align:center;
+    ">
+      <texto1> Boleta de Venta Electrónica</br>
+      {{numero_boleta}}</br>
+    </texto1>
+    </div>
+	<div id="datos" >
+		<d1 style=" font-size: 1em;">Fecha de emisión: {{fecha}}</br>
+			Hora de emisión: {{hora}}</br>
+		 Cliente: {{cliente}}</br>
+		 DNI/RUC: {{documento}}</br>
+    </d1>
+	</div>
+
+    <div id="bot">
+
+                    <div id="table">
+                        <table>
+                            <tr class="tabletitle">
+                                <td class="Rate"><h3>DESCRIPCIÓN</h3></td>  
+				                <td class="Rate"><h3>TOTAL</h3></td>
+							</tr>
+
+                            <tr class="service">
+                                <td class="tableitem"><p class="itemtext" vv>{{descripcion}}</p></td>
+                                <td class="tableitem"><p class="itemtext" bb>{{total}}</p></td>
+                            </tr>
+                            <tr class="tabletitle">
+                                <td></td>
+                                <td class="Rate"><h2 style="font-size: 1.4em;">OP. GRAV. : </h2></td>
+                                <td class="Pu"><h2 style="font-size: 1.4em;">S/. {{monto_total}}</h2></td>
+                            </tr>
+
+                            <tr class="tabletitle">
+                              <td></td>
+                              <td class="Rate"><h2 style="font-size: 1.4em;">OP. EXON. :</h2></td>
+                              <td class="Pu"><h2 style="font-size: 1.4em;">S/. 0</h2></td>
+                          </tr>
+
+                            <tr class="tabletitle">
+                                <td></td>
+                                <td class="Rate"><h2 style="font-size: 1.4em;">IGV (18%):  </h2></td>
+                                <td class="payment"><h2 style="font-size: 1.4em;">S/. 0</h2></td>
+                            </tr>
+							<tr class="tabletitle">
+                                <td></td>
+                                <td class="Rate"><h2 style="font-size: 1.4em;">TOTAL: </h2></td>
+                                <td class="payment"><h2 style="font-size: 1.4em;">S/. {{monto_total1}}</h2></td>
+                            </tr>
+
+                        </table>
+                    </div><!--End Table-->
+
+                    <div id="legalcopy">
+                        <p class="legal" style="text-align:center;"><strong>{{son}}</strong>  
+                        </p>
+                    </div>
+                
+                <p style="text-align:center;font-size: .65em;">Representación impresa de la boleta de venta electrónica </p>	
+                <p style="text-align:center;font-size: .65em;"> Código Hash: {{hash}}</p>
+                </div><!--End InvoiceBot-->
+  
+                <center id="top">
+                  <div class="logo"></div>
+                  <div class="info"> 
+                  </div>
+                </center>
+  
+              </div><!--End Invoice-->
+  
+
+
+
+
+
+</body>
+
+</html>
