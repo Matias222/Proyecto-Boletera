@@ -11,6 +11,7 @@ from xml.dom.minidom import Document
 from jinja2 import Template
 import codecs
 
+## Lo mas probable es que sea la version de python!!!
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
@@ -50,7 +51,13 @@ def lectura(path):
 
     Bs_data = BeautifulSoup(data, "xml")
 
+    print(Bs_data)
+
     nombres=Bs_data.find_all('RegistrationName')
+
+    print(str(nombres))
+
+
     nombre_negocio=texto(nombres[0])
     nombre_cliente=texto(nombres[1])
 
